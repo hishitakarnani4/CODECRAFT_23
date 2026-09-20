@@ -1,0 +1,1108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SafeRoute - Smart Safety Journey Planner</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- ================= SIDEBAR ================= -->
+
+<aside class="sidebar">
+
+    <div class="brand">
+        <div class="brand-icon">✦</div>
+
+        <div>
+            <h2>SafeRoute</h2>
+            <p>Smart Safety Planner</p>
+        </div>
+    </div>
+
+    <nav class="navigation">
+
+        <button class="nav-item active" onclick="goTo('home')" data-screen="home">
+            <span class="nav-icon">⌂</span>
+            <span>Plan Journey</span>
+        </button>
+
+        <button class="nav-item" onclick="goTo('routes')" data-screen="routes">
+            <span class="nav-icon">⇢</span>
+            <span>Routes</span>
+        </button>
+
+        <button class="nav-item" onclick="goTo('journey')" data-screen="journey">
+            <span class="nav-icon">◉</span>
+            <span>Journey</span>
+        </button>
+
+        <button class="nav-item" onclick="goTo('insights')" data-screen="insights">
+            <span class="nav-icon">⌁</span>
+            <span>Insights</span>
+        </button>
+
+        <button class="nav-item" onclick="goTo('profile')" data-screen="profile">
+            <span class="nav-icon">○</span>
+            <span>Profile</span>
+        </button>
+
+    </nav>
+
+    <div class="privacy-card">
+
+        <div class="privacy-icon">🔒</div>
+
+        <div>
+            <strong>Privacy First</strong>
+            <p>Your journey information stays within the planner.</p>
+        </div>
+
+    </div>
+
+</aside>
+
+
+<!-- ================= MAIN ================= -->
+
+<main class="main-content">
+
+
+<!-- ================= SCREEN 1 : HOME ================= -->
+
+<section id="home" class="screen active">
+
+    <div class="page-header">
+
+        <div>
+            <span class="eyebrow">SMART JOURNEY PLANNER</span>
+
+            <h1>Plan a safer journey</h1>
+
+            <p>
+                Compare routes, understand journey conditions,
+                and choose the route that suits you.
+            </p>
+        </div>
+
+    </div>
+
+
+    <div class="planner-card">
+
+        <div class="planner-heading">
+
+            <div class="planner-icon">⌖</div>
+
+            <div>
+                <h2>Where are you going?</h2>
+                <p>Enter your starting point and destination.</p>
+            </div>
+
+        </div>
+
+
+        <div class="location-fields">
+
+            <div class="input-group">
+
+                <label>Starting Point</label>
+
+                <div class="input-wrapper">
+                    <span class="field-icon">●</span>
+
+                    <input
+                        type="text"
+                        id="fromInput"
+                        value="SVECW Campus"
+                        placeholder="Enter starting point"
+                    >
+                </div>
+
+            </div>
+
+
+            <div class="route-arrow">
+                ↓
+            </div>
+
+
+            <div class="input-group">
+
+                <label>Destination</label>
+
+                <div class="input-wrapper">
+                    <span class="field-icon destination-icon">●</span>
+
+                    <input
+                        type="text"
+                        id="toInput"
+                        value="Home"
+                        placeholder="Enter destination"
+                    >
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- TRANSPORT -->
+
+        <div class="transport-section">
+
+            <label>Choose your transport</label>
+
+            <div class="transport-options">
+
+                <button
+                    class="transport-option active"
+                    onclick="selectTransport(this, 'Walking')"
+                >
+                    <span class="transport-icon walking-icon">🚶</span>
+                    <span class="transport-name">Walking</span>
+                </button>
+
+
+                <button
+                    class="transport-option"
+                    onclick="selectTransport(this, 'Car')"
+                >
+                    <span class="transport-icon">🚗</span>
+                    <span class="transport-name">Car</span>
+                </button>
+
+
+                <button
+                    class="transport-option"
+                    onclick="selectTransport(this, 'Bus')"
+                >
+                    <span class="transport-icon">🚌</span>
+                    <span class="transport-name">Bus</span>
+                </button>
+
+
+                <button
+                    class="transport-option"
+                    onclick="selectTransport(this, 'Cab / Auto')"
+                >
+                    <span class="transport-icon">🚕</span>
+                    <span class="transport-name">Cab / Auto</span>
+                </button>
+
+
+                <button
+                    class="transport-option"
+                    onclick="selectTransport(this, 'Two-wheeler')"
+                >
+                    <span class="transport-icon">🏍️</span>
+                    <span class="transport-name">Two-wheeler</span>
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="planner-bottom">
+
+            <div class="input-group small-input">
+
+                <label>Journey Date</label>
+
+                <div class="input-wrapper">
+                    <span class="field-icon">▣</span>
+
+                    <input type="date" id="dateInput">
+                </div>
+
+            </div>
+
+
+            <div class="input-group small-input">
+
+                <label>Departure Time</label>
+
+                <div class="input-wrapper">
+                    <span class="field-icon">◷</span>
+
+                    <input
+                        type="time"
+                        id="timeInput"
+                        value="21:30"
+                    >
+                </div>
+
+            </div>
+
+
+            <button class="primary-button plan-button" onclick="planJourney()">
+                Plan Safe Journey
+                <span>→</span>
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- INTRO -->
+
+    <div class="intro-card">
+
+        <div class="intro-symbol">✦</div>
+
+        <div>
+            <h3>How SafeRoute works</h3>
+
+            <p>
+                SafeRoute compares available journey options and
+                highlights route conditions, risk points and
+                nearby support locations.
+            </p>
+        </div>
+
+    </div>
+
+
+    <!-- FEATURES -->
+
+    <div class="feature-grid">
+
+        <div class="feature-card">
+            <div class="feature-icon">⇢</div>
+            <h3>Route Comparison</h3>
+            <p>Compare different journey options before starting.</p>
+        </div>
+
+        <div class="feature-card">
+            <div class="feature-icon">◉</div>
+            <h3>Journey Breakdown</h3>
+            <p>Understand individual sections of your selected route.</p>
+        </div>
+
+        <div class="feature-card">
+            <div class="feature-icon">♧</div>
+            <h3>Safety Support</h3>
+            <p>View support locations available around the route.</p>
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ================= SCREEN 2 : ROUTES ================= -->
+
+<section id="routes" class="screen">
+
+    <div class="page-header">
+
+        <div>
+
+            <span class="eyebrow">ROUTE OPTIONS</span>
+
+            <h1>Choose your route</h1>
+
+            <p id="routeJourneyName">
+                SVECW Campus → Home
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- ROUTE MAP -->
+
+    <div class="route-map-card">
+
+        <div class="map-header">
+
+            <div>
+                <h2>Safety route map</h2>
+                <p>Explore the available route options.</p>
+            </div>
+
+            <div class="map-legend">
+
+                <span>
+                    <i class="legend-dot safe-dot"></i>
+                    Lower concern
+                </span>
+
+                <span>
+                    <i class="legend-dot moderate-dot"></i>
+                    Moderate
+                </span>
+
+                <span>
+                    <i class="legend-dot attention-dot"></i>
+                    Attention
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="map">
+
+            <div class="map-road road-one"></div>
+            <div class="map-road road-two"></div>
+            <div class="map-road road-three"></div>
+            <div class="map-road road-four"></div>
+
+            <div class="building building-one"></div>
+            <div class="building building-two"></div>
+            <div class="building building-three"></div>
+            <div class="building building-four"></div>
+
+            <div class="route-line route-a-line"></div>
+            <div class="route-line route-b-line"></div>
+            <div class="route-line route-c-line"></div>
+
+            <div class="map-marker start-marker">A</div>
+            <div class="map-marker end-marker">B</div>
+
+            <button
+                class="risk-marker risk-one"
+                onclick="showRisk('Low lighting', 4, '1 recent report')"
+            >
+                !
+            </button>
+
+            <button
+                class="risk-marker risk-two"
+                onclick="showRisk('Busy junction', 3, '2 recent reports')"
+            >
+                !
+            </button>
+
+            <button
+                class="risk-marker risk-three"
+                onclick="showRisk('Reported concern', 3, '2 recent reports')"
+            >
+                !
+            </button>
+
+            <button class="support-marker" onclick="showSupport()">
+                +
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- ROUTE PRIORITY -->
+
+    <div class="priority-card">
+
+        <div>
+            <h3>Route preference</h3>
+
+            <p id="priorityText">
+                Balanced journey
+            </p>
+        </div>
+
+        <input
+            type="range"
+            min="0"
+            max="100"
+            value="50"
+            id="prioritySlider"
+            oninput="changePriority()"
+        >
+
+        <div class="priority-labels">
+            <span>Faster</span>
+            <span>Balanced</span>
+            <span>Safety focused</span>
+        </div>
+
+    </div>
+
+
+    <!-- ROUTES -->
+
+    <div class="route-cards">
+
+        <article
+            class="route-card selected"
+            id="routeCard0"
+            onclick="selectRoute(0)"
+        >
+
+            <div class="route-top">
+
+                <div>
+                    <span class="route-label">ROUTE A</span>
+                    <h2>Balanced Route</h2>
+                </div>
+
+                <div class="route-check">✓</div>
+
+            </div>
+
+            <div class="route-main-info">
+
+                <div class="route-time">
+                    <strong id="routeATime">19 min</strong>
+                    <span id="routeADistance">6.2 km</span>
+                </div>
+
+                <div class="route-score">
+                    <strong id="routeAScore">72</strong>
+                    <span>Safety</span>
+                </div>
+
+            </div>
+
+            <div class="route-details">
+                <span>4 sections</span>
+                <span>•</span>
+                <span>2 attention points</span>
+            </div>
+
+        </article>
+
+
+        <article
+            class="route-card"
+            id="routeCard1"
+            onclick="selectRoute(1)"
+        >
+
+            <div class="route-top">
+
+                <div>
+                    <span class="route-label">ROUTE B</span>
+                    <h2>Safety Priority</h2>
+                </div>
+
+                <div class="route-check">✓</div>
+
+            </div>
+
+            <div class="route-main-info">
+
+                <div class="route-time">
+                    <strong id="routeBTime">23 min</strong>
+                    <span id="routeBDistance">7.1 km</span>
+                </div>
+
+                <div class="route-score">
+                    <strong id="routeBScore">86</strong>
+                    <span>Safety</span>
+                </div>
+
+            </div>
+
+            <div class="route-details">
+                <span>5 sections</span>
+                <span>•</span>
+                <span>1 attention point</span>
+            </div>
+
+        </article>
+
+
+        <article
+            class="route-card"
+            id="routeCard2"
+            onclick="selectRoute(2)"
+        >
+
+            <div class="route-top">
+
+                <div>
+                    <span class="route-label">ROUTE C</span>
+                    <h2>Alternative Route</h2>
+                </div>
+
+                <div class="route-check">✓</div>
+
+            </div>
+
+            <div class="route-main-info">
+
+                <div class="route-time">
+                    <strong id="routeCTime">21 min</strong>
+                    <span id="routeCDistance">6.8 km</span>
+                </div>
+
+                <div class="route-score">
+                    <strong id="routeCScore">79</strong>
+                    <span>Safety</span>
+                </div>
+
+            </div>
+
+            <div class="route-details">
+                <span>4 sections</span>
+                <span>•</span>
+                <span>1 attention point</span>
+            </div>
+
+        </article>
+
+    </div>
+
+
+    <div class="route-action">
+
+        <button class="primary-button" onclick="continueToJourney()">
+            Continue with selected route
+            <span>→</span>
+        </button>
+
+    </div>
+
+</section>
+
+
+
+<!-- ================= SCREEN 3 : JOURNEY ================= -->
+
+<section id="journey" class="screen">
+
+    <div class="page-header">
+
+        <div>
+
+            <span class="eyebrow">YOUR JOURNEY</span>
+
+            <h1 id="journeyTitle">Balanced Route</h1>
+
+            <p id="journeySubtitle">
+                SVECW Campus → Home
+            </p>
+
+        </div>
+
+        <div class="journey-status">
+            <span class="status-dot"></span>
+            Route selected
+        </div>
+
+    </div>
+
+
+    <!-- JOURNEY SUMMARY -->
+
+    <div class="journey-summary">
+
+        <div class="summary-item">
+
+            <span class="summary-icon">◷</span>
+
+            <div>
+                <small>Estimated time</small>
+                <strong id="journeyTime">19 min</strong>
+            </div>
+
+        </div>
+
+
+        <div class="summary-item">
+
+            <span class="summary-icon">↝</span>
+
+            <div>
+                <small>Distance</small>
+                <strong id="journeyDistance">6.2 km</strong>
+            </div>
+
+        </div>
+
+
+        <div class="summary-item">
+
+            <span class="summary-icon">♡</span>
+
+            <div>
+                <small>Safety score</small>
+                <strong id="journeyScore">72 / 100</strong>
+            </div>
+
+        </div>
+
+
+        <div class="summary-item">
+
+            <span class="summary-icon" id="journeyTransportIcon">🚶</span>
+
+            <div>
+                <small>Transport</small>
+                <strong id="journeyTransport">Walking</strong>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- JOURNEY MAP -->
+
+    <div class="journey-map-card">
+
+        <div class="journey-map">
+
+            <div class="journey-road jr-one"></div>
+            <div class="journey-road jr-two"></div>
+            <div class="journey-road jr-three"></div>
+
+            <div class="journey-route"></div>
+
+            <div class="journey-node node-start">
+                <span>1</span>
+            </div>
+
+            <div class="journey-node node-two">
+                <span>2</span>
+            </div>
+
+            <div class="journey-node node-three">
+                <span>3</span>
+            </div>
+
+            <div class="journey-node node-end">
+                <span>4</span>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- JOURNEY BREAKDOWN -->
+
+    <div class="section-heading">
+
+        <div>
+            <span class="eyebrow">ROUTE BREAKDOWN</span>
+            <h2>Journey sections</h2>
+        </div>
+
+        <span class="section-info" id="sectionCount">
+            4 sections
+        </span>
+
+    </div>
+
+
+    <div class="segment-list" id="segmentList">
+
+        <!-- Filled dynamically by JavaScript -->
+
+    </div>
+
+
+    <!-- JOURNEY BOTTOM -->
+
+    <div class="journey-bottom">
+
+        <div class="journey-note">
+
+            <span>✦</span>
+
+            <div>
+                <strong id="journeyRecommendation">
+                    Balanced route selected
+                </strong>
+
+                <p id="journeyRecommendationText">
+                    This route provides a balance between journey time,
+                    distance and route conditions.
+                </p>
+            </div>
+
+        </div>
+
+
+        <button class="secondary-button" onclick="goTo('insights')">
+            View Insights →
+        </button>
+
+    </div>
+
+</section>
+
+
+
+<!-- ================= SCREEN 4 : INSIGHTS ================= -->
+
+<section id="insights" class="screen">
+
+    <div class="page-header">
+
+        <div>
+
+            <span class="eyebrow">JOURNEY INSIGHTS</span>
+
+            <h1>Understand your route</h1>
+
+            <p>
+                Helpful information based on your selected journey.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="insight-grid">
+
+        <div class="insight-card large-insight">
+
+            <div class="insight-icon">↝</div>
+
+            <div>
+
+                <span class="insight-label">SELECTED ROUTE</span>
+
+                <h2 id="insightRouteName">
+                    Balanced Route
+                </h2>
+
+                <p id="insightRouteText">
+                    Your selected route provides a balanced journey
+                    across time, distance and route conditions.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="insight-card">
+
+            <div class="insight-icon attention-icon">!</div>
+
+            <div>
+
+                <span class="insight-label">ATTENTION AREA</span>
+
+                <h2 id="insightRiskName">
+                    Market Junction
+                </h2>
+
+                <p id="insightRiskText">
+                    Low lighting has been identified along this
+                    section of the route.
+                </p>
+
+                <button
+                    class="text-button"
+                    onclick="showRisk('Low lighting', 4, '1 recent report')"
+                >
+                    View details →
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="insight-card">
+
+            <div class="insight-icon">↗</div>
+
+            <div>
+
+                <span class="insight-label">ROUTE OPTION</span>
+
+                <h2 id="insightAlternative">
+                    Safety alternative
+                </h2>
+
+                <p id="insightAlternativeText">
+                    A longer route may provide different journey
+                    conditions.
+                </p>
+
+                <button
+                    class="text-button"
+                    onclick="showDetour()"
+                >
+                    Compare route →
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- SUPPORT -->
+
+    <div class="support-section">
+
+        <div class="section-heading">
+
+            <div>
+                <span class="eyebrow">SUPPORT LOCATIONS</span>
+                <h2>Along your journey</h2>
+            </div>
+
+            <button class="secondary-button" onclick="showSupport()">
+                View all
+            </button>
+
+        </div>
+
+
+        <div class="support-grid">
+
+            <div class="support-card">
+
+                <span class="support-icon">✚</span>
+
+                <div>
+                    <strong>Hospital</strong>
+                    <p id="hospitalDistance">0.8 km from route</p>
+                </div>
+
+            </div>
+
+
+            <div class="support-card">
+
+                <span class="support-icon">★</span>
+
+                <div>
+                    <strong>Police Station</strong>
+                    <p id="policeDistance">1.2 km from route</p>
+                </div>
+
+            </div>
+
+
+            <div class="support-card">
+
+                <span class="support-icon">●</span>
+
+                <div>
+                    <strong>Public Transit</strong>
+                    <p id="transitDistance">0.5 km from route</p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ================= SCREEN 5 : PROFILE ================= -->
+
+<section id="profile" class="screen">
+
+    <div class="page-header">
+
+        <div>
+
+            <span class="eyebrow">COMMUNITY</span>
+
+            <h1>Share a route concern</h1>
+
+            <p>
+                Help improve journey information by reporting
+                a concern you noticed.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="profile-layout">
+
+
+        <!-- REPORT -->
+
+        <div class="report-card">
+
+            <div class="card-heading">
+
+                <div class="heading-icon">+</div>
+
+                <div>
+                    <h2>Report a concern</h2>
+                    <p>Share useful information about a route.</p>
+                </div>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Location</label>
+
+                <input
+                    type="text"
+                    id="reportLocation"
+                    placeholder="Enter location"
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Concern type</label>
+
+                <select id="reportCategory">
+
+                    <option value="Poor lighting">
+                        Poor lighting
+                    </option>
+
+                    <option value="Road condition">
+                        Road condition
+                    </option>
+
+                    <option value="Crowded area">
+                        Crowded area
+                    </option>
+
+                    <option value="Other">
+                        Other
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Description</label>
+
+                <textarea
+                    id="reportDescription"
+                    rows="5"
+                    placeholder="Describe the concern"
+                ></textarea>
+
+            </div>
+
+
+            <button class="primary-button" onclick="submitReport()">
+                Submit Report
+                <span>→</span>
+            </button>
+
+        </div>
+
+
+        <!-- SAVED JOURNEYS -->
+
+        <div class="saved-card">
+
+            <div class="card-heading">
+
+                <div class="heading-icon">♡</div>
+
+                <div>
+                    <h2>Saved journeys</h2>
+                    <p>Your frequently used routes.</p>
+                </div>
+
+            </div>
+
+
+            <div class="saved-journey">
+
+                <div class="saved-icon">⌂</div>
+
+                <div>
+                    <strong>SVECW Campus → Home</strong>
+                    <span>Frequently used</span>
+                </div>
+
+                <button onclick="loadSavedJourney()">
+                    →
+                </button>
+
+            </div>
+
+
+            <div class="saved-journey">
+
+                <div class="saved-icon">⌂</div>
+
+                <div>
+                    <strong>Home → Campus</strong>
+                    <span>Frequently used</span>
+                </div>
+
+                <button onclick="loadSavedJourney()">
+                    →
+                </button>
+
+            </div>
+
+
+            <div class="privacy-box">
+
+                <span>🔒</span>
+
+                <p>
+                    Journey details are handled within the planner
+                    and are not shared through this interface.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+</main>
+
+
+
+<!-- ================= MODAL ================= -->
+
+<div id="modal" class="modal">
+
+    <div class="modal-box">
+
+        <button class="modal-close" onclick="closeModal()">
+            ×
+        </button>
+
+        <div id="modalContent"></div>
+
+    </div>
+
+</div>
+
+
+<!-- ================= TOAST ================= -->
+
+<div id="toast" class="toast">
+    <span class="toast-icon">✓</span>
+    <span id="toastMessage">Updated</span>
+</div>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>
